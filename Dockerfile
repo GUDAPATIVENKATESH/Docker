@@ -1,5 +1,5 @@
-#Spring_Pet_Clinic
-FROM amazoncorreto:11-alpine-jdk
-ADD https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar /spring-petclinic-2.4.2.jar
+#Game_Of_Life
+FROM tomcat:8-jdk8
+ADD https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/gameoflife.war /usr/local/tomcat/webapps/gameoflife.war
 EXPOSE 8080
-CMD ["java","-jar","spring-petclinic-2.4.2.jar"]
+CMD ["catalina.sh", "run"]
