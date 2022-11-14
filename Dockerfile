@@ -1,5 +1,9 @@
-#Game_Of_Life
-FROM tomcat:8-jdk8
-ADD https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/gameoflife.war /usr/local/tomcat/webapps/gameoflife.war
-EXPOSE 8080
-CMD ["catalina.sh", "run"]
+#angular-realworld-example-app(nodejs)
+FROM node:16
+LABEL project="nodejs"
+LABEL author="VENKATESHGUDAPATI"
+RUN git clone https://github.com/gothinkster/angular-realworld-example-app.git
+RUN cd angular-realworld-example-app.git && npm install -g @angular/cli && npm install
+EXPOSE 4200
+WORKDIR /angular-realworld-example-app
+CMD ["ng", "serve", "--host", "0.0.0.0"]
