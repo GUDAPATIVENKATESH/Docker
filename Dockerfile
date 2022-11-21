@@ -1,9 +1,12 @@
-#angular-realworld-example-app(nodejs)
-FROM node:16
-LABEL project="nodejs"
-LABEL author="VENKATESHGUDAPATI"
-RUN git clone https://github.com/gothinkster/angular-realworld-example-app.git
-RUN cd angular-realworld-example-app && npm install -g @angular/cli && npm install
-EXPOSE 4200
-WORKDIR /angular-realworld-example-app
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+#MultiStage_image_Build
+FROM maven:3.8.6-openjdk-11 as Build
+RUN git clone https://github.com/GUDAPATIVENKATESH/spring-petclinic.git && \
+    cd spring-petclinic/ && \
+    mvn package
+#jar location /spring-petclinic/target/spring-petclinic-2.7.3.jar
+FROM openjdk:11
+LABEL project = "SpringPetClinic"
+LABEL author = "VENKATESH"
+EXPOSE 8080
+COPY --from=Build /spring-petclinic/target/spring-petclinic-2.7.3.jar spring-petclinic-2.7.3.jar
+CMD ["java", "-jar", "spring-petclinic-2.7.3.jar"]
